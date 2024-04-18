@@ -1,6 +1,7 @@
-from scapy.all import sr,IP,ICMP,TCP,sniff,wrpcap
+from scapy.all import sr,IP,ICMP,TCP,sniff,wrpcap,AsyncSniffer
 import os
 import sys
+import time
 
 # Requesting root privileges
 if os.geteuid() != 0:
