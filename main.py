@@ -9,7 +9,7 @@ if os.geteuid() != 0:
 
 # Constants
 DEST_IP_ADDR = "99.99.99.254"
-DEST_PORT_RANGE = (0, 100)
+DEST_PORT_RANGE = (0, 65535)
 PACKET_ANS_TIMEOUT = 5
 VULNERABLE_SERVICE_PORT = 80
 
@@ -30,7 +30,7 @@ try:
     # Running some instructions... injecting commands...
     
     # Asynchronously Sniffing network activity
-    cap = AsyncSniffer(iface = "eth0", count = 5, filter = "icmp and host 99.99.99.254", prn = lambda p: p.sprintf("Received ICMP packet from %IP.dst%"))
+    cap = AsyncSniffer(iface = ["eth0", "lo"], count = 5, filter = "icmp", prn = lambda p: p.sprintf("Received ICMP packet from %IP.dst%"))
     cap.start()
 
     # print("Sending ICMP echo-request instruction to the vulnerable machine...")
