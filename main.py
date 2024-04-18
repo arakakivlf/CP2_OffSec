@@ -8,6 +8,9 @@ if os.geteuid() != 0:
     print("This script needs root privileges.")
     sys.exit()
 
+# Maybe we could get user-provided arguments in order to set some of the
+# contants below (like DEST_PORT_RANGE).
+
 # Constants
 DEST_IP_ADDR = "99.99.99.254"
 DEST_PORT_RANGE = (0, 65535)
